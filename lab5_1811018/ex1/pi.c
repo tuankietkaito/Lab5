@@ -11,10 +11,6 @@ void *letCount(void *param);
 
 int main(int argc, char *argv[])
 {
-    double nPoints = atoll(argv[1]);
-    srand(time(NULL));
-    nThreads = nPoints / 20;
-
     if (argc != 2)
     {
         printf("Please enter nPoints!\n");
@@ -27,6 +23,9 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+    double nPoints = atoll(argv[1]);
+    srand(time(NULL));
+    nThreads = nPoints / 20;
     for (int i = 0; i < 20; ++i)
         pthread_create(&tid[i], NULL, letCount, &count[i]);
 

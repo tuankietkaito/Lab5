@@ -1,16 +1,23 @@
 LAB 5 - BONUS
 QUESTION: What is the differences between Mutex and Spinlock?
 ANSWER:
-When multiple threads need to modify a shared resource such as a global variable, we typically lock the 
-resource to guarantee at most one thread can do modification, such that a thread cannot interfere with 
-other threads and leads to unexpected behaviors. Mutex and Spinlock are types of these locks.
+When multiple threads need to modify a shared resource such as a 
+global variable, we typically lock the resource to guarantee at 
+most one thread can do modification, such that a thread cannot 
+interfere with other threads and leads to unexpected behaviors. 
+Mutex and Spinlock are types of these locks.
+
 MUTEX:
-1. A thread tests for lock. If critical resources are available, the thread can use the resources. Otherwise, 
-the thread goes to wait queue.
+1. A thread tests for lock. If critical resources are available, 
+the thread can use the resources. Otherwise, the thread goes to 
+wait queue.
 2. Used when the task can sleep while waiting for the lock.
-3. Used when there will be considerable time before process gets the lock.
+3. Used when there will be considerable time before process gets 
+the lock.
+
 SPINLOCK:
-1. A thread tests for lock. If critical resources are available, the thread can use the resources. Otherwise, 
-it loops again and tests the lock till getting the lock.
+1. A thread tests for lock. If critical resources are available, 
+the thread can use the resources. Otherwise, it loops again and 
+tests the lock till getting the lock.
 2. Used when task can’t sleep while waiting for the lock.
 3. Used when lock will be granted in reasonably short time.
