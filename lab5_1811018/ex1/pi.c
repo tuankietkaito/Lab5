@@ -38,8 +38,8 @@ int main(int argc, char *argv[])
     }
 
     // Deal with the remaining cases
-    if (nPoints % 20 > 0)
-        for (int i = 0; i < (nPoints % 8); i++)
+    if ((int)nPoints % 20 > 0)
+        for (int i = 0; i < ((int)nPoints % 20); i++)
         {
             double x = (double)rand() / RAND_MAX * 2.0 - 1.0;
             double y = (double)rand() / RAND_MAX * 2.0 - 1.0;
