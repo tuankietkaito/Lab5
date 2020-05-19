@@ -16,14 +16,14 @@ int main(int argc, char *argv[])
         printf("Please enter nPoints!\n");
         return -1;
     }
-
+    
+    double nPoints = atoll(argv[1]); 
     if (nPoints <= 0)
     {
         printf("nPoints must be greater than 0\n");
         return -1;
     }
 
-    double nPoints = atoll(argv[1]);
     srand(time(NULL));
     nThreads = nPoints / 20;
     for (int i = 0; i < 20; ++i)
