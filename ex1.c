@@ -4,42 +4,42 @@
 #include <stdlib.h>
 #include <math.h>
 
-unsigned long long range;
-long count[8] = {0};
+unsigned long long nThreads;
+pthread_t tid[20];
+long count[20] = {0};
 void *letCount(void *param);
 
 int main(int argc, char *argv[])
 {
+    double nPoints = atoll(argv[1]);
     srand(time(NULL));
-    pthread_t tid[8];
-    range = atoll(argv[1]) / 8;
+    nThreads = nPoints / 20;
 
     if (argc != 2)
     {
-        printf("The Number Of Arguments Is Wrong\n");
+        printf("Please enter nPoints!\n");
         return -1;
     }
 
-    if (atoll(argv[1]) < 0)
+    if (nPoints <= 0)
     {
-        printf("Argument must be >= 0\n");
+        printf("nPoints must be greater than 0\n");
         return -1;
     }
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < 20; ++i)
         pthread_create(&tid[i], NULL, letCount, &count[i]);
 
-    for (int i = 0; i < 8; i++)
+    long total = 0;
+    for (int i = 0; i < 20; ++i)
+    {
         pthread_join(tid[i], NULL);
-
-    // Total number of inside-circle points
-    int total = 0;
-    for (int i = 0; i < 8; i++)
         total += count[i];
+    }
 
-    // Random the remain cases
-    if (atoll(argv[1]) % 8 > 0)
-        for (int i = 0; i < atoll(argv[1]) % 8; i++)
+    // Deal with the remaining cases
+    if (nPoints % 20 > 0)
+        for (int i = 0; i < (nPoints % 8); i++)
         {
             double x = (double)rand() / RAND_MAX * 2.0 - 1.0;
             double y = (double)rand() / RAND_MAX * 2.0 - 1.0;
@@ -47,14 +47,14 @@ int main(int argc, char *argv[])
                 total++;
         }
 
-    printf("%llu\n", 4 * total / (atoll(argv[1])));
+    printf("%5lf\n", 4.0 * total / nPoints);
     return 0;
 }
 
 void *letCount(void *param)
 {
-    unsigned long long *n = (unsigned long long *)param;
-    for (int i = 0; i < range; i++)
+    long *n = (long *)param;
+    for (int i = 0; i < nThreads; i++)
     {
         double x = (double)rand() / RAND_MAX * 2.0 - 1.0;
         double y = (double)rand() / RAND_MAX * 2.0 - 1.0;
