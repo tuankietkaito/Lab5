@@ -46,13 +46,13 @@ int main(int argc, char *argv[])
                 total++;
         }
 
-    printf("%lu\n", 4 * total / (atoll(argv[1])));
+    printf("%llu\n", 4 * total / (atoll(argv[1])));
     return 0;
 }
 
 void *letCount(void *param)
 {
-    unsigned long long n = (unsigned long long *)param;
+    unsigned long long *n = (unsigned long long *)param;
     for (int i = 0; i < range; i++)
     {
         double x = (double)rand() / RAND_MAX * 2.0 - 1.0;
