@@ -9,7 +9,7 @@ void *letCount(void *param);
 
 int main(int argc, char *argv[])
 {
-    srand(time());
+    srand(time(NULL));
     pthread_t tid[8];
     range = atoll(argv[1]) / 8;
 
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
                 total++;
         }
 
-    printf("%d\n", 4 * total / (atoll(argv[1])));
+    printf("%lu\n", 4 * total / (atoll(argv[1])));
     return 0;
 }
 
@@ -58,7 +58,7 @@ void *letCount(void *param)
         double x = (double)rand() / RAND_MAX * 2.0 - 1.0;
         double y = (double)rand() / RAND_MAX * 2.0 - 1.0;
         if (x * x + y * y <= 1.0)
-            count[k]++;
+            n++;
     }
     pthread_exit(0);
 }
